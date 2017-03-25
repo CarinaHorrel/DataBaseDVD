@@ -1,11 +1,17 @@
 package nl.carinahome.dvd.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class DVD {
@@ -17,7 +23,11 @@ public class DVD {
 	private String origin;
 	private boolean bonus;
 	private String remarks;
-	private List<Genre> genres;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	private List<Genre> genres = new ArrayList<Genre>();
+	
 	/**
 	 * @return the id
 	 */

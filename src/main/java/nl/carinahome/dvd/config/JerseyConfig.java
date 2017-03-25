@@ -15,6 +15,6 @@ public class JerseyConfig extends ResourceConfig {
 	public JerseyConfig(){
 		register(DVDEndpoint.class);
 		register(GenreEndpoint.class);
-		register(FileImportEndpoint.class);
+		//register(FileImportEndpoint.class);
 	}
 }
