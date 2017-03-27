@@ -1,5 +1,7 @@
 package nl.carinahome.dvd.rest.service;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,14 +26,63 @@ public class DVDEndpoint {
 	@Autowired
 	private DVDService dvdService;
 	
+	/**
+	 * Creates a new dvd
+	 * @param dvd the new DVD to be created
+	 * @return Code 202 (accepted) with the new dvd id
+	 */	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response postDVD(DVD dvd){
-		System.out.println("@POST: " + dvd.getId() + " - " + dvd.getTitle());
 		DVD result = dvdService.save(dvd);
-		System.out.println("@POST: " + result.getId() + " - " + result.getTitle());
-		return Response.accepted(result).build();
+		return Response.accepted(result.getId()).build();
 	}
-
+	
+	/**
+	 * Gets an existing dvd
+	 * @param id the id of the DVD to be fetched
+	 * @return Code 200 (ok) with the DVD or 204 (no content) if the dvd does not exist
+	 */	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("{id}")
+	// /search/{searchstring} 
+	public Response getDVDById(@PathParam("id") Long id ) {
+		DVD result = this.dvdService.findById(id);
+		if (result == null) {
+			return Response.noContent().build();
+		} else {
+			return Response.ok(result).build();
+		}
+	}	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("search/{tkst}")
+	// /search/{searchstring} 
+	public Response jojojo(@PathParam("tkst") String tkst ) {
+		List<DVD> result = this.dvdService.jojo(tkst);
+		if (result == null) {
+			System.out.println("geen resultaat");
+			return Response.noContent().build();
+		} else {
+			System.out.println("wel resultaat");
+			return Response.ok(result).build();
+		}
+	}
+	/**
+	 * Gets all dvds in DB
+	 * @return Code 200 (ok) with the Student or 204 (no content) if there are no students in DB
+	 */	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getDVDs() {
+		Iterable<DVD> result = this.dvdService.findAll();
+		if (result == null) {
+			return Response.noContent().build();
+		} else {
+			return Response.ok(result).build();
+		}
+	}
+	
 }

@@ -112,6 +112,4 @@ public class DVD {
 	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
 	}
-	
-	
 }
