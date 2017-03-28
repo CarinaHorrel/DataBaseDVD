@@ -28,6 +28,9 @@ public class DVD {
 	@Fetch(FetchMode.SELECT)
 	private List<Genre> genres = new ArrayList<Genre>();
 	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	private List<Actor> actors = new ArrayList<Actor>();
 	/**
 	 * @return the id
 	 */
@@ -111,5 +114,17 @@ public class DVD {
 	 */
 	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
+	}
+	/**
+	 * @return the actors
+	 */
+	public List<Actor> getActors() {
+		return actors;
+	}
+	/**
+	 * @param actors the actors to set
+	 */
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
 	}
 }

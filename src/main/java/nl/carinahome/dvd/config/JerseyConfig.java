@@ -9,6 +9,11 @@ import nl.carinahome.dvd.rest.service.DVDEndpoint;
 import nl.carinahome.dvd.rest.service.GenreEndpoint;
 import nl.carinahome.dvd.rest.service.FileImportEndpoint;
 
+/**
+ * 
+ * @author WCHorrel
+ *
+ */
 @Component
 @ApplicationPath("/api")
 public class JerseyConfig extends ResourceConfig {

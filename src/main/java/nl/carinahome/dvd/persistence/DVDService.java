@@ -29,17 +29,17 @@ public class DVDService {
 
 	public void deleteById(Long id) {
 		dvdRepository.delete(id);
-	}
+	}	
 	
-	public void findBytitle(Long id) {
-		dvdRepository.delete(id);
-	}
 	
 	public List<DVD> jojo(String title){
 		return dvdRepository.findByTitle(title);
 	}
 	
 	
+//	public List<DVD> jojo(String title){
+//		return dvdRepository.findByTitle(title);
+//	}
 	
 	
 }
