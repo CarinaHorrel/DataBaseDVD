@@ -7,9 +7,15 @@ import org.springframework.stereotype.Component;
 
 import nl.carinahome.dvd.domain.DVD;
 
+/**
+ * 
+ * @author WCHorrel
+ *
+ */
 @Component
 public interface DVDRepository extends CrudRepository <DVD, Long>{
 	
 	List<DVD> findByTitle(String title);
+	List<DVD> findByYear(int year);
 
 }

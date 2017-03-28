@@ -59,7 +59,6 @@ public class DVDEndpoint {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("search/{tkst}")
-	// /search/{searchstring} 
 	public Response jojojo(@PathParam("tkst") String tkst ) {
 		List<DVD> result = this.dvdService.jojo(tkst);
 		if (result == null) {
