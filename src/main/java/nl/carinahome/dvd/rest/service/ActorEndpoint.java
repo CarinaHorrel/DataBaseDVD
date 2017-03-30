@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import nl.carinahome.dvd.domain.Actor;
-import nl.carinahome.dvd.domain.Genre;
 import nl.carinahome.dvd.persistence.ActorService;
-import nl.carinahome.dvd.persistence.GenreService;
 
 @Path("actor")
 @Component
