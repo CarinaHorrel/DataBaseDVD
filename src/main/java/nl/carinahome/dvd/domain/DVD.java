@@ -3,6 +3,7 @@ package nl.carinahome.dvd.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ public class DVD {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@Column(unique=true, nullable=false)
 	private String title;
 	private int year;
 	private String origin;
@@ -127,4 +130,57 @@ public class DVD {
 	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
+	
+	public void addGenre(Genre genre){
+		this.genres.add(genre);
+	}
+	
+	public void addActor(Actor actor){
+		this.actors.add(actor);
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((actors == null) ? 0 : actors.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + year;
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DVD other = (DVD) obj;
+		if (actors == null) {
+			if (other.actors != null)
+				return false;
+		} else if (!actors.equals(other.actors))
+			return false;
+		if (id != other.id)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
+	}
+	
+	
+		
 }

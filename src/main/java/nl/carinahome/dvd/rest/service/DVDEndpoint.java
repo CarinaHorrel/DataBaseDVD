@@ -1,5 +1,6 @@
 package nl.carinahome.dvd.rest.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,26 +18,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import nl.carinahome.dvd.domain.DVD;
+import nl.carinahome.dvd.domain.model.DVDModelBasic;
 import nl.carinahome.dvd.persistence.DVDService;
 
 @Path("dvd")
 @Component
 public class DVDEndpoint {
-
 	@Autowired
 	private DVDService dvdService;
 	
 	/**
 	 * Creates a new dvd
-	 * @param dvd the new DVD to be created
+	 * @param dvd the new DVD to be added tot the database
 	 * @return Code 202 (accepted) with the new dvd id
 	 */	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response postDVD(DVD dvd){
-		DVD result = dvdService.save(dvd);
-		return Response.accepted(result.getId()).build();
+		Long newId = dvdService.newDVD(dvd);
+		return Response.accepted(newId).build();
 	}
 	
 	/**
@@ -47,41 +48,79 @@ public class DVDEndpoint {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
-	// /search/{searchstring} 
 	public Response getDVDById(@PathParam("id") Long id ) {
-		DVD result = this.dvdService.findById(id);
-		if (result == null) {
+		DVD dvd = this.dvdService.findById(id);
+		if (dvd == null) {
 			return Response.noContent().build();
 		} else {
-			return Response.ok(result).build();
-		}
-	}	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("search/{tkst}")
-	public Response jojojo(@PathParam("tkst") String tkst ) {
-		List<DVD> result = this.dvdService.jojo(tkst);
-		if (result == null) {
-			System.out.println("geen resultaat");
-			return Response.noContent().build();
-		} else {
-			System.out.println("wel resultaat");
-			return Response.ok(result).build();
-		}
-	}
-	/**
-	 * Gets all dvds in DB
-	 * @return Code 200 (ok) with the Student or 204 (no content) if there are no students in DB
-	 */	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getDVDs() {
-		Iterable<DVD> result = this.dvdService.findAll();
-		if (result == null) {
-			return Response.noContent().build();
-		} else {
+			DVD l2 = this.dvdService.findById(id);
+			System.out.println(dvd.equals(l2));
+			DVDModelBasic result = new DVDModelBasic(dvd);
 			return Response.ok(result).build();
 		}
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listDVD(){
+		List<DVDModelBasic> result = new ArrayList<>();
+		List<DVD> dvds = new ArrayList<>();
+		dvds = (List<DVD>) dvdService.findAll();
+		for (int i=0 ; i<dvds.size() ; i++ ) {
+			DVDModelBasic dmb = new DVDModelBasic(dvds.get(i));
+			result.add(dmb);
+		}
+		return Response.ok(result).build();
+	}
+	
+	
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("{id}")
+	public Response deleteDVDById(@PathParam("id") Long id){
+		this.dvdService.deleteById(id);
+		return Response.accepted().build();
+	}
+
+	/**
+	 * Methode om een actor aan een DVD toe te voegen
+	 * @param id de id van de DVD
+	 * @param actor_id de id van de Actor die toegevoegd moet worden
+	 * @return true als de Actor is toegevoegd, anders false
+	 */
+	@PUT
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("{id}/actor/{actor_id}")
+	public Response addActorToDVD(@PathParam("id") Long id, @PathParam("actor_id") Long actor_id) {
+		return Response.accepted(this.dvdService.addActorToDVD(id, actor_id)).build();
+	}
+	
+	/**
+	 * Methode om een genre aan een DVD toe te voegen
+	 * @param id de id van de DVD
+	 * @param genre_id de id van de Genre die toegevoegd moet worden
+	 * @return true als de Genre is toegevoegd, anders false
+	 */
+	@PUT
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("{id}/genre/{genre_id}")
+	public Response addGenreToDVD(@PathParam("id") Long id, @PathParam("genre_id") Long genre_id) {
+		return Response.accepted(this.dvdService.addGenreToDVD(id, genre_id)).build();
+	}
 }
+//	/**
+//	 * Gets all dvds in DB
+//	 * @return Code 200 (ok) with the Student or 204 (no content) if there are no students in DB
+//	 */	
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response getDVDs() {
+//		Iterable<DVD> result = this.dvdService.findAll();
+//		if (result == null) {
+//			return Response.noContent().build();
+//		} else {
+//			return Response.ok(result).build();
+//		}
+//	}
+//	
+//}
