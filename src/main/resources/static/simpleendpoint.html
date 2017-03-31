@@ -1,77 +1,39 @@
 <html>
 	<head>
 		<title>Database DVDs</title>
-		<script>
-			function addDVD(){
-				var api = document.getElementById("dvdApi").value;
-                var title = document.getElementById("title").value;
-                var year = document.getElementById("year").value;
-				var origin=document.getElementById("origin").value;
-				var bonus=document.getElementById("bonus").value;
-				var remarks=document.getElementById("remarks").value;
-				var dvd = '{"title":"'+title+'","year":"'+year+'"}'; 
-				postData(api, dvd);
-			}
-
-	
-
-			function postData(api, data){
-                var xhttp = new XMLHttpRequest();
-  				xhttp.onreadystatechange = function() {
-    				if (this.readyState == 4 && this.status == 202) {
-      				document.getElementById("demo").innerHTML = this.responseText;
-    				}
-  				};
-                xhttp.open("POST", "http://localhost:8082/"+api, true);
-				xhttp.setRequestHeader("Content-type", "application/json");
-				xhttp.send(data);
-			}
-			function getData(api){
-          var xhttp = new XMLHttpRequest();
-  				xhttp.onreadystatechange = function() {
-    				if (this.readyState == 4 && this.status == 200) {
-      				document.getElementById("demo").innerHTML = this.responseText;
-    				}
-  				};
-                xhttp.open("GET", "http://localhost:8082/"+api);
-				
-					xhttp.setRequestHeader("Content-type", "application/json");
-					xhttp.send();
-			}
-		</script>
+		<script src="javascript/dvd.js"></script>
 	</head>
 	<body>
-		RESULT SERVER: <div id=demo></div>
+		RESULT SERVER: 
+		<div id=demo></div>
 		<hr>
 		DVD:
-		API: <input type=text id="dvdApi" value="api/dvd"/><hr />
+		API: <input type=text id="dvdApi" value="api/dvd"/>
+		<hr>
 		title:<input type="text" id="title"/><br />
 		year:<input type="text" id="year"/><br />
 		origin:<input type="text" id="origin"/><br />
 		bonus:<input type="text" id="bonus"/><br />
 		remarks:<input type="text" id="remarks"/><br />
 		<button onclick="addDVD()">Add</button>
-		<button onclick="getData('api/dvd')">getten</button>
+		<button onclick="getDataDVD('api/dvd')">getten</button>
+		<select id="DVDs" onchange="selectDVD(event)">
+			<option value="dvds">dvds</option>
+		</select>
+
 		<hr>
-		
+		<button onclick="getDataActor('api/actor')">getten</button><br>
+		<select id="actors" onchange="selectActor(event)">
+			<option value="actors">actors</option>
+		</select>
+		<select id="subDVDs">
+			
+		</select>
+		<hr>
+		<button onclick="getDataGenre('api/genre')">getten</button><br>
+		<select id="genres" onchange="selectGenre(event)">
+			<option value="genres">genres</option>
+		</select>
     </body>
 </html>
 
-
-
-<!DOCTYPE html>
-<html>
-<body>
-<title>Database DVD</title>
-<p id="allDVD">Show all DVDs.</p>
-
-<button onclick="myFunction()">Try it</button>
-
-<script>
-function myFunction() {
-    document.getElementById("allDVD").innerHTML = "Alle DVDs";
-}
-</script>
-
-</body>
-</html>
