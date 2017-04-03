@@ -19,18 +19,19 @@ function addDVD(){
 }
 
 function addActor(){
-    var firstname = document.getElementById("firstName").value;
-    var lastname = document.getElementById("lastName").value;
+    var firstname = document.getElementById("firstname").value;
+    var lastname = document.getElementById("lastname").value;
     var actor = '{"firstName":"'+firstname+'","lastName":"'+lastname+'"}'; 
     postData('api/actor', actor);
 }
 function addGenre(){
-    var genrename = document.getElementById("genreName").value;
-    var genre = '{"genrename":"'+genreName+'"}'; 
+    var genrename = document.getElementById("genrename").value;
+    var genre = '{"genreName":"'+genrename+'"}'; 
     postData('api/genre', genre);
 }
 
 function postData(api, data){
+    console.log(data);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
@@ -115,7 +116,7 @@ function selectDVD(event) {
 function selectActor(event) {
     var id=event.target.value;
     console.log(event.target.value);
-    var subdvd=document.getElementById("subDVDs");
+    var subdvd=document.getElementById("subDVDsA");
     subdvd.innerHTML="";
     for (var i=0 ; i< dvdLijst.length ; i++) {
          for (var j=0 ; j< dvdLijst[i].actors.length ; j++) {

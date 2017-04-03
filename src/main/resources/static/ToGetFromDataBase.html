@@ -7,9 +7,7 @@
 		RESULT SERVER: 
 		<div id=demo>
 			<hr>
-			DVD:
-			API: <input type=text id="dvdApi" value="api/dvd"/>
-			<hr>
+			<h1>DVD:</h1>
 			title:<input type="text" id="title"/><br />
 			year:<input type="text" id="year"/><br />
 			origin:<input type="text" id="origin"/><br />
@@ -20,14 +18,11 @@
 			<select id="DVDs" onchange="selectDVD(event)">
 				<option value="dvds">dvds</option>
 			</select>
-			</div>
-			<hr>
+		</div>
+		<hr>
 
 		<div id=demo2>
-			<hr>
-			ACTOR:
-			API: <input type=text id="actorApi" value="api/actor"/>
-			<hr>
+			<h1>ACTOR:</h1>
 			firstname:<input type="text" id="firstname"/><br />
 			lastname:<input type="text" id="lastname"/><br />
 			<button onclick="addActor()">AddActor</button><br>
@@ -42,9 +37,7 @@
 		<hr>
 		<div id=demo3>
 			<hr>
-			GENRE:
-			API: <input type=text id="genreApi" value="api/genre"/>
-			<hr>
+			<h1>GENRE:</h1>
 			genrename:<input type="text" id="genrename"/><br />
 			<button onclick="addGenre()">AddGenre</button><br>
 			<button onclick="getDataGenre('api/genre')">getGenre</button><br>
@@ -53,6 +46,7 @@
 			</select>
 			<select id="subDVDsG">	
 			</select>
+		</div>
     </body>
 </html>
 

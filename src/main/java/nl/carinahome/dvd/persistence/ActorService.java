@@ -42,19 +42,26 @@ public class ActorService {
 	 * </ul>
 	 */
 	public long newActor(Actor actor) {
+		System.out.println(actor);
 		if (actor.getId() != 0) {
 			return -1;
 		} else if (actor.getFirstName() == null) {
 			return -2;
 		} else {
+			System.out.println(actor);
 			List<Actor> actors = new ArrayList<>();
 			actors = (List<Actor>) this.actorRepository.findAll();
-			for (int i=0 ; i<actors.size() ; i++) {
-				if (actors.get(i).getFirstName().equals(actor.getFirstName())) {
-					return -3;
-				}
-			}
+			System.out.println("Size=" + actors.size());
+//			for (int i=0 ; i<actors.size() ; i++) {
+//				System.out.println(actor + "   " + i);
+//
+//				if (actors.get(i).getFirstName().equals(actor.getFirstName())) {
+//					return -3;
+//				}
+//			}
 		}
+		System.out.println(actor);
+
 		Actor result = this.actorRepository.save(actor);
 		return result.getId();
 	}
