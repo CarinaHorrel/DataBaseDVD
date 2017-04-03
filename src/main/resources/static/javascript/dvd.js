@@ -1,5 +1,6 @@
 var dvdLijst;
 var actorLijst;
+var actorSelected;
 var genreLijst;
 window.onload=function(){
     getDataDVD('api/dvd');
@@ -115,6 +116,7 @@ function selectDVD(event) {
 }
 function selectActor(event) {
     var id=event.target.value;
+    actor = getActorByID(id);
     console.log(event.target.value);
     var subdvd=document.getElementById("subDVDsA");
     subdvd.innerHTML="";
@@ -129,6 +131,22 @@ function selectActor(event) {
                }
          }       
     }
+}
+
+function getActorByID(id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           var actor = JSON.parse(this.responseText);
+            console.log(actor);
+            this.actorSelected=actor;
+            document.getElementById("firstname").value=actor.firstName;
+            document.getElementById("lastname").value=actor.lastName;
+        }
+    };
+    xhttp.open("GET", "http://localhost:8082/api/actor/"+id);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
 }
 
 function selectGenre(event) {
