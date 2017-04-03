@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>Database DVDs</title>
+		<script src="javascript/dvd.js"></script>
+	</head>
+	<body>
+		RESULT SERVER: 
+		<div id=demo>
+			<hr>
+			DVD:
+			API: <input type=text id="dvdApi" value="api/dvd"/>
+			<hr>
+			title:<input type="text" id="title"/><br />
+			year:<input type="text" id="year"/><br />
+			origin:<input type="text" id="origin"/><br />
+			bonus:<input type="text" id="bonus"/><br />
+			remarks:<input type="text" id="remarks"/><br />
+			<button onclick="addDVD()">AddDVD</button><br>
+			<button onclick="getDataDVD('api/dvd')">getDVD</button>
+			<select id="DVDs" onchange="selectDVD(event)">
+				<option value="dvds">dvds</option>
+			</select>
+			</div>
+			<hr>
+
+		<div id=demo2>
+			<hr>
+			ACTOR:
+			API: <input type=text id="actorApi" value="api/actor"/>
+			<hr>
+			firstname:<input type="text" id="firstname"/><br />
+			lastname:<input type="text" id="lastname"/><br />
+			<button onclick="addActor()">AddActor</button><br>
+			<button onclick="getDataActor('api/actor')">getActor</button><br>
+			<select id="actors" onchange="selectActor(event)">
+				<option value="actors">actors</option>
+			</select>
+			<select id="subDVDsA">	
+			</select>
+		</div>
+			
+		<hr>
+		<div id=demo3>
+			<hr>
+			GENRE:
+			API: <input type=text id="genreApi" value="api/genre"/>
+			<hr>
+			genrename:<input type="text" id="genrename"/><br />
+			<button onclick="addGenre()">AddGenre</button><br>
+			<button onclick="getDataGenre('api/genre')">getGenre</button><br>
+			<select id="genres" onchange="selectGenre(event)">
+				<option value="genres">genres</option>
+			</select>
+			<select id="subDVDsG">	
+			</select>
+    </body>
+</html>
+

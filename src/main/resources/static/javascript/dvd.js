@@ -1,23 +1,43 @@
 var dvdLijst;
+var actorLijst;
+var genreLijst;
 window.onload=function(){
     getDataDVD('api/dvd');
+    getDataActor('api/actor');
+    getDataGenre('api/genre');
+
 }
+
 function addDVD(){
-    var api = document.getElementById("dvdApi").value;
     var title = document.getElementById("title").value;
     var year = document.getElementById("year").value;
     var origin=document.getElementById("origin").value;
     var bonus=document.getElementById("bonus").value;
     var remarks=document.getElementById("remarks").value;
     var dvd = '{"title":"'+title+'","year":"'+year+'"}'; 
-    postData(api, dvd);
+    postData('api/dvd', dvd);
+}
+
+function addActor(){
+    var firstname = document.getElementById("firstName").value;
+    var lastname = document.getElementById("lastName").value;
+    var actor = '{"firstName":"'+firstname+'","lastName":"'+lastname+'"}'; 
+    postData('api/actor', actor);
+}
+function addGenre(){
+    var genrename = document.getElementById("genreName").value;
+    var genre = '{"genrename":"'+genreName+'"}'; 
+    postData('api/genre', genre);
 }
 
 function postData(api, data){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
-            document.getElementById("demo").innerHTML = this.responseText;
+            console.log(this.responseText);
+            if (api=='api/dvd') getDataDVD(api);
+            else if (api=='api/actor') getDataActor(api);
+             else if (api=='api/genre') getDataGenre(api);
         }
     };
     xhttp.open("POST", "http://localhost:8082/"+api, true);

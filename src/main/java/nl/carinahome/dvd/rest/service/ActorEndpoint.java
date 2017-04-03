@@ -1,5 +1,8 @@
 package nl.carinahome.dvd.rest.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import nl.carinahome.dvd.domain.Actor;
+import nl.carinahome.dvd.domain.model.ActorModelBasic;
 import nl.carinahome.dvd.persistence.ActorService;
 
 @Path("actor")
@@ -23,26 +27,49 @@ public class ActorEndpoint {
 	@Autowired
 	private ActorService actorService;
 	
+	/**
+	 * Creates a new actor
+	 * @param actor the new Actor to be added to the database
+	 * @return Code 202 (accepted) with the new actor id
+	 */	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response postActor(Actor actor){
-		Actor result = actorService.save(actor);
-		return Response.accepted(result).build();
+		Long newId = actorService.newActor(actor);
+		return Response.accepted(newId).build();
 	}
 	
+	/**
+	 * Gets an existing actor
+	 * @param id the id of the Actor to be fetched
+	 * @return Code 200 (ok) with the Actor or 204 (no content) if the actor does not exist
+	 */	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public Response getActorById(@PathParam("id") Long id ) {
-		Actor result = this.actorService.findById(id);
-		return Response.ok(result).build();
+		Actor actor = this.actorService.findById(id);
+		if (actor == null) {
+			return Response.noContent().build();
+		} else {
+			Actor l2 = this.actorService.findById(id);
+			System.out.println(actor.equals(l2));
+			ActorModelBasic result = new ActorModelBasic(actor);
+			return Response.ok(result).build();
+		}
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listActor(){
-		Iterable <Actor> result = actorService.findAll();
+		List<ActorModelBasic> result = new ArrayList<>();
+		List<Actor> actors = new ArrayList<>();
+		actors = (List<Actor>) actorService.findAll();
+		for (int i=0 ; i<actors.size() ; i++ ) {
+			ActorModelBasic dmb = new ActorModelBasic(actors.get(i));
+			result.add(dmb);
+		}
 		return Response.ok(result).build();
 	}
 	
