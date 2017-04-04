@@ -1,6 +1,7 @@
 var dvdLijst;
 var actorLijst;
 var actorSelected;
+var genreSelected;
 var genreLijst;
 window.onload=function(){
     getDataDVD('api/dvd');
@@ -118,8 +119,8 @@ function selectActor(event) {
     var id=event.target.value;
     actor = getActorByID(id);
     console.log(event.target.value);
-    var subdvd=document.getElementById("subDVDsA");
-    subdvd.innerHTML="";
+    var subdvda=document.getElementById("subDVDsA");
+    subdvda.innerHTML="";
     for (var i=0 ; i< dvdLijst.length ; i++) {
          for (var j=0 ; j< dvdLijst[i].actors.length ; j++) {
                console.log(dvdLijst[i].actors[j].firstName);
@@ -127,7 +128,7 @@ function selectActor(event) {
                     var opt = document.createElement("option");
                     opt.value = dvdLijst[i].id;
                     opt.textContent = dvdLijst[i].title ;
-                    subdvd.appendChild(opt);
+                    subdvda.appendChild(opt);
                }
          }       
     }
@@ -150,5 +151,35 @@ function getActorByID(id){
 }
 
 function selectGenre(event) {
+var id=event.target.value;
+    genre = getGenreByID(id);
     console.log(event.target.value);
+    var subdvdg=document.getElementById("subDVDsG");
+    subdvdg.innerHTML="";
+    for (var i=0 ; i< dvdLijst.length ; i++) {
+         for (var j=0 ; j< dvdLijst[i].genres.length ; j++) {
+               console.log(dvdLijst[i].genres[j].genreName);
+               if (id==dvdLijst[i].genres[j].id){
+                    var opt = document.createElement("option");
+                    opt.value = dvdLijst[i].id;
+                    opt.textContent = dvdLijst[i].title ;
+                    subdvdg.appendChild(opt);
+               }
+         }       
+    }
+}
+
+function getGenreByID(id){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           var genre = JSON.parse(this.responseText);
+            console.log(genre);
+            this.genreSelected=genre;
+            document.getElementById("genrename").value=genre.genreName;
+        }
+    };
+    xhttp.open("GET", "http://localhost:8082/api/actor/"+id);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
 }

@@ -36,8 +36,8 @@ public class GenreService {
 	 * @param genre De id van de nieuwe genre
 	 * @return de nieuwe id of anders <ul>
 	 * <li>-1 als de genre een id heeft
-	 * <li>-2 als title gelijk is aan null
-	 * <li>-3 als de title al bestaat
+	 * <li>-2 als genreName gelijk is aan null
+	 * <li>-3 als de genre al bestaat
 	 * </ul>
 	 */
 	public long newGenre(Genre genre) {

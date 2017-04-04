@@ -37,7 +37,7 @@ public class ActorService {
 	 * @param actor De id van de nieuwe actor
 	 * @return de nieuwe id of anders <ul>
 	 * <li>-1 als de actor een id heeft
-	 * <li>-2 als title gelijk is aan null
+	 * <li>-2 als firstname and lastname gelijk is aan null
 	 * <li>-3 als de title al bestaat
 	 * </ul>
 	 */
@@ -45,20 +45,20 @@ public class ActorService {
 		System.out.println(actor);
 		if (actor.getId() != 0) {
 			return -1;
-		} else if (actor.getFirstName() == null) {
+		} else if (actor.getFirstName() == null || actor.getLastName() == null) {
 			return -2;
 		} else {
 			System.out.println(actor);
 			List<Actor> actors = new ArrayList<>();
 			actors = (List<Actor>) this.actorRepository.findAll();
 			System.out.println("Size=" + actors.size());
-//			for (int i=0 ; i<actors.size() ; i++) {
-//				System.out.println(actor + "   " + i);
-//
-//				if (actors.get(i).getFirstName().equals(actor.getFirstName())) {
-//					return -3;
-//				}
-//			}
+			for (int i=0 ; i<actors.size() ; i++) {
+				System.out.println(actor + "   " + i);
+
+				if (actors.get(i).getFirstName().equals(actor.getFirstName()) & actors.get(i).getLastName().equals(actor.getLastName())   ) {
+					return -3;
+				}
+			}
 		}
 		System.out.println(actor);
 
