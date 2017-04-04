@@ -112,22 +112,11 @@ function getDataGenre(api){
     xhttp.send();
 }
 
-// function selectDVD(event) {
-//     console.log(event.target.value);
-// }
 
 function selectDVD(event) {
     var id=event.target.value;
     dvd = getDVDByID(id);
     console.log(event.target.value);
-    // var subdvd=document.getElementById("subDVDs");
-    // subdvd.innerHTML="";
-    // for (var i=0 ; i< dvdLijst.length ; i++) {
-    //                 var opt = document.createElement("option");
-    //                 opt.value = dvdLijst[i].id;
-    //                 //opt.textContent = dvdLijst[i].title ;
-    //                 subdvd.appendChild(opt);
-    //            }
 }       
 
 function selectActor(event) {
@@ -206,6 +195,7 @@ function getDVDByID(id){
            var dvd = JSON.parse(this.responseText);
             console.log(dvd);
             this.dvdSelected=dvd;
+            document.getElementById("id").value=dvd.id;
             document.getElementById("title").value=dvd.title;
             document.getElementById("year").value=dvd.year;
             document.getElementById("origin").value=dvd.origin;
