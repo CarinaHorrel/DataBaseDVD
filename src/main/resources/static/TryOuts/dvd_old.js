@@ -1,13 +1,13 @@
 var dvdLijst;
 var actorLijst;
 var actorSelected;
-var dvdSelected
 var genreSelected;
 var genreLijst;
 window.onload=function(){
     getDataDVD('api/dvd');
     getDataActor('api/actor');
     getDataGenre('api/genre');
+
 }
 
 function addDVD(){
@@ -112,24 +112,9 @@ function getDataGenre(api){
     xhttp.send();
 }
 
-// function selectDVD(event) {
-//     console.log(event.target.value);
-// }
-
 function selectDVD(event) {
-    var id=event.target.value;
-    dvd = getDVDByID(id);
     console.log(event.target.value);
-    var subdvd=document.getElementById("subDVDs");
-    subdvd.innerHTML="";
-    for (var i=0 ; i< dvdLijst.length ; i++) {
-                    var opt = document.createElement("option");
-                    opt.value = dvdLijst[i].id;
-                    opt.textContent = dvdLijst[i].title ;
-                    subdvd.appendChild(opt);
-               }
-}       
-
+}
 function selectActor(event) {
     var id=event.target.value;
     actor = getActorByID(id);
@@ -195,25 +180,6 @@ function getGenreByID(id){
         }
     };
     xhttp.open("GET", "http://localhost:8082/api/genre/"+id);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
-}
-
-function getDVDByID(id){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-           var dvd = JSON.parse(this.responseText);
-            console.log(dvd);
-            this.dvdSelected=dvd;
-            document.getElementById("title").value=dvd.title;
-            document.getElementById("year").value=dvd.year;
-            document.getElementById("origin").value=dvd.origin;
-            document.getElementById("bonus").value=dvd.bonus;
-            document.getElementById("remarks").value=dvd.remarks;
-        }
-    };
-    xhttp.open("GET", "http://localhost:8082/api/dvd/"+id);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
 }
