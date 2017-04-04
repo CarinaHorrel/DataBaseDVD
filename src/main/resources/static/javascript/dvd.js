@@ -120,14 +120,14 @@ function selectDVD(event) {
     var id=event.target.value;
     dvd = getDVDByID(id);
     console.log(event.target.value);
-    var subdvd=document.getElementById("subDVDs");
-    subdvd.innerHTML="";
-    for (var i=0 ; i< dvdLijst.length ; i++) {
-                    var opt = document.createElement("option");
-                    opt.value = dvdLijst[i].id;
-                    opt.textContent = dvdLijst[i].title ;
-                    subdvd.appendChild(opt);
-               }
+    // var subdvd=document.getElementById("subDVDs");
+    // subdvd.innerHTML="";
+    // for (var i=0 ; i< dvdLijst.length ; i++) {
+    //                 var opt = document.createElement("option");
+    //                 opt.value = dvdLijst[i].id;
+    //                 //opt.textContent = dvdLijst[i].title ;
+    //                 subdvd.appendChild(opt);
+    //            }
 }       
 
 function selectActor(event) {
