@@ -64,6 +64,8 @@ public class DVDService {
 				}
 			}
 		}
+		System.out.println(dvd);
+		
 		DVD result = this.dvdRepository.save(dvd);
 		return result.getId();
 	}

@@ -37,13 +37,30 @@ function addActor(){
     var lastname = document.getElementById("lastname").value;
     var actor = '{"firstName":"'+firstname+'","lastName":"'+lastname+'"}'; 
     postData('api/actor', actor, "POST");
+} 
+
+function putDataActor(){
+    console.log("PUT");
+    var id_actor = document.getElementById("id_actor").value;
+    var firstname = document.getElementById("firstname").value;
+    var lastname = document.getElementById("lastname").value;
+    var actor = '{"id":'+id_actor+',"firstName":"'+firstname+'","lastName":"'+lastname+'"}'; 
+    postData('api/actor', actor, "PUT");
 }
+
 function addGenre(){
     var genrename = document.getElementById("genrename").value;
     var genre = '{"genreName":"'+genrename+'"}'; 
     postData('api/genre', genre, "POST");
 }
 
+function putDataGenre(){
+    console.log("PUT");
+    var id_genre = document.getElementById("id_genre").value;
+    var genrename = document.getElementById("genrename").value;
+    var genre = '{"id":'+id_genre+',"genreName":"'+genrename+'"}'; 
+    postData('api/genre', genre, "PUT");
+}
 function postData(api, data, crud){
     console.log(data);
     console.log(crud);

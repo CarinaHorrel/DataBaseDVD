@@ -85,8 +85,8 @@ public class ActorEndpoint {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response putActor(Actor actor) {
-		this.actorService.save(actor);
-		Actor result = actorService.save(actor);
+		System.out.println(actor.getId());
+		Actor result = this.actorService.save(actor);
 		return Response.accepted(result).build();
 	}
 	

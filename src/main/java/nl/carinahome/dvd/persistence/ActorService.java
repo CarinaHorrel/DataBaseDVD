@@ -16,6 +16,7 @@ public class ActorService {
 	private ActorRepository actorRepository;
 
 	public Actor save(Actor actor){
+		System.out.println("Actor id "+ actor.getId());
 		return actorRepository.save(actor);
 	}
 

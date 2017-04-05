@@ -7,8 +7,6 @@ import nl.carinahome.dvd.domain.Genre;
 public class GenreModelBasic {
 	private Genre genre;
 	
-private Actor actor;
-	
 	public GenreModelBasic(Genre genre) {
 		this.genre = genre;
 	}

@@ -16,6 +16,7 @@ public class GenreService {
 	private GenreRepository genreRepository;
 
 	public Genre save(Genre genre){
+		System.out.println("Genre id "+ genre.getId());
 		return genreRepository.save(genre);
 	}
 

@@ -85,8 +85,7 @@ public class GenreEndpoint {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response putGenre(Genre genre) {
-		this.genreService.save(genre);
-		Genre result = genreService.save(genre);
+		Genre result = this.genreService.save(genre);
 		return Response.accepted(result).build();
 	}
 	
