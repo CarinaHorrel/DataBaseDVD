@@ -145,6 +145,7 @@ function getActorByID(id){
            var actor = JSON.parse(this.responseText);
             console.log(actor);
             this.actorSelected=actor;
+            document.getElementById("id_actor").value=actor.id;
             document.getElementById("firstname").value=actor.firstName;
             document.getElementById("lastname").value=actor.lastName;
         }
@@ -180,6 +181,7 @@ function getGenreByID(id){
            var genre = JSON.parse(this.responseText);
             console.log(genre);
             this.genreSelected=genre;
+            document.getElementById("id_genre").value=genre.id;
             document.getElementById("genrename").value=genre.genreName;
         }
     };
