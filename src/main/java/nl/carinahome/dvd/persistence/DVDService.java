@@ -24,6 +24,7 @@ public class DVDService {
 	private GenreService genreService;
 	
 	public DVD save(DVD dvd){
+		System.out.println("DVD id "+ dvd.getId());
 		return dvdRepository.save(dvd);
 	}
 

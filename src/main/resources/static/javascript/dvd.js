@@ -16,24 +16,37 @@ function addDVD(){
     var origin=document.getElementById("origin").value;
     var bonus=document.getElementById("bonus").value;
     var remarks=document.getElementById("remarks").value;
-    var dvd = '{"title":"'+title+'","year":"'+year+'"}'; 
-    postData('api/dvd', dvd);
+    var dvd = '{"title":"'+title+'","year":'+year+',"origin":"'+origin+'","bonus":"'+bonus+'","remarks":"'+remarks+'"}'; 
+    postData('api/dvd', dvd, "POST");
+}
+
+function putDataDVD(){
+    console.log("PUT");
+    var id = document.getElementById("id").value;
+    var title = document.getElementById("title").value;
+    var year = document.getElementById("year").value;
+    var origin=document.getElementById("origin").value;
+    var bonus=document.getElementById("bonus").value;
+    var remarks=document.getElementById("remarks").value;
+    var dvd = '{"id":'+id+',"title":"'+title+'","year":'+year+',"origin":"'+origin+'","bonus":"'+bonus+'","remarks":"'+remarks+'"}'; 
+    postData('api/dvd', dvd, "PUT");
 }
 
 function addActor(){
     var firstname = document.getElementById("firstname").value;
     var lastname = document.getElementById("lastname").value;
     var actor = '{"firstName":"'+firstname+'","lastName":"'+lastname+'"}'; 
-    postData('api/actor', actor);
+    postData('api/actor', actor, "POST");
 }
 function addGenre(){
     var genrename = document.getElementById("genrename").value;
     var genre = '{"genreName":"'+genrename+'"}'; 
-    postData('api/genre', genre);
+    postData('api/genre', genre, "POST");
 }
 
-function postData(api, data){
+function postData(api, data, crud){
     console.log(data);
+    console.log(crud);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
@@ -43,7 +56,7 @@ function postData(api, data){
              else if (api=='api/genre') getDataGenre(api);
         }
     };
-    xhttp.open("POST", "http://localhost:8082/"+api, true);
+    xhttp.open(crud, "http://localhost:8082/"+api, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(data);
 }

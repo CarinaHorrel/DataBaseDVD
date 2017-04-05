@@ -33,7 +33,7 @@
 			<select id="actors" onchange="selectActor(event)">
 				<option value="actors">actors</option>
 			</select>
-			<select id="subDVDsA">	
+			<select id="subDVDsA" onchange="selectDVD(event)">	
 			</select><br>
             <button onclick="putDataActor('api/actor')">updateActor</button><br>
 		</div>
@@ -49,7 +49,7 @@
 			<select id="genres" onchange="selectGenre(event)">
 				<option value="genres">genres</option>
 			</select>
-			<select id="subDVDsG">	
+			<select id="subDVDsG"
 			</select><br>
             <button onclick="putDataGenre('api/genre')">updateGenre</button><br>
 		</div>

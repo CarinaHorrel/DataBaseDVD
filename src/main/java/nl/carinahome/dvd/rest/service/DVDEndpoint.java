@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import nl.carinahome.dvd.domain.Actor;
 import nl.carinahome.dvd.domain.DVD;
 import nl.carinahome.dvd.domain.model.DVDModelBasic;
 import nl.carinahome.dvd.persistence.DVDService;
@@ -87,8 +86,7 @@ public class DVDEndpoint {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response putDVD(DVD dvd) {
-		this.dvdService.save(dvd);
-		DVD result = dvdService.save(dvd);
+		DVD result = this.dvdService.save(dvd);
 		return Response.accepted(result).build();
 	}
 	
