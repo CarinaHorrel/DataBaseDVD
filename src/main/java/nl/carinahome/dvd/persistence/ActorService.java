@@ -49,12 +49,12 @@ public class ActorService {
 		} else if (actor.getFirstName() == null || actor.getLastName() == null) {
 			return -2;
 		} else {
-			System.out.println(actor);
+			//System.out.println(actor);
 			List<Actor> actors = new ArrayList<>();
 			actors = (List<Actor>) this.actorRepository.findAll();
 			System.out.println("Size=" + actors.size());
 			for (int i=0 ; i<actors.size() ; i++) {
-				System.out.println(actor + "   " + i);
+				//System.out.println(actor + "   " + i);
 
 				if (actors.get(i).getFirstName().equals(actor.getFirstName()) & actors.get(i).getLastName().equals(actor.getLastName())   ) {
 					return -3;
