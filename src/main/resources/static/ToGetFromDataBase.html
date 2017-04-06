@@ -14,12 +14,23 @@
 			origin:<input type="text" id="origin"/><br />
 			bonus:<input type="text" id="bonus"/><br />
 			remarks:<input type="text" id="remarks"/><br />
+
+			<h4>Optional:</h4>
+			<select id="dvd_actors" onchange="selectActor(event)">
+				<option value="actors">actors</option>
+			</select>
+
+			<select id="dvd_genres" onchange="selectGenre(event)">
+				<option value="genres">genres</option>
+			</select>
+
 			<button onclick="addDVD()">AddDVD</button><br>
 			<button onclick="getDataDVD('api/dvd')">getDVD</button>
 			<select id="DVDs" onchange="selectDVD(event)">
 				<option value="dvds">dvds</option>
 			</select><br>
             <button onclick="putDataDVD('api/dvd')">updateDVD</button><br>
+		    <button onclick="deleteDVD('api/dvd', 'dvd')">deleteDVD</button><br>
 		</div>
 		<hr>
  
@@ -36,6 +47,7 @@
 			<select id="subDVDsA" onchange="selectDVD(event)">	
 			</select><br>
             <button onclick="putDataActor('api/actor')">updateActor</button><br>
+			<button onclick="deleteActor('api/actor', 'actor')">deleteActor</button><br>
 		</div>
 			
 		<hr>
@@ -52,6 +64,7 @@
 			<select id="subDVDsG" onclick="selectDVD(event)">
 			</select><br>
             <button onclick="putDataGenre('api/genre')">updateGenre</button><br>
+	        <button onclick="deleteGenre('api/genre', 'genre')">deleteGenre</button><br>
 		</div>
 		<hr>
     </body>

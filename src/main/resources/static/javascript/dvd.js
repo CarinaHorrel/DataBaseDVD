@@ -6,8 +6,10 @@ var genreSelected;
 var genreLijst;
 window.onload=function(){
     getDataDVD('api/dvd');
-    getDataActor('api/actor');
-    getDataGenre('api/genre');
+    getDataActor('api/actor', "dvd_actors"); 
+    getDataActor('api/actor', "actors");
+    getDataGenre('api/genre',"dvd_genres");
+    getDataGenre('api/genre', "genres");
 }
 
 function addDVD(){
@@ -78,6 +80,38 @@ function postData(api, data, crud){
     xhttp.send(data);
 }
 
+function deleteDVD(){
+    var id = document.getElementById("id").value;
+    var dvd = '{"id":'+id+'}'; 
+    deleteData('api/dvd/'+id, dvd, "DELETE");
+}
+
+function deleteActor(){
+    var id_actor = document.getElementById("id_actor").value;
+    var actor = '{"id":'+id_actor+'}'; 
+    deleteData('api/actor/'+id_actor, actor, "DELETE");
+}
+function deleteGenre(){
+    var id_genre = document.getElementById("id_genre").value;
+    var genre = '{"id":'+id_genre+'}'; 
+    deleteData('api/genre/'+id_genre, genre, "DELETE");
+}
+
+function deleteData(api, data, crud){
+    console.log(data);
+    console.log(crud);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 202) {
+            console.log(this.responseText);
+        }
+    };
+    
+    xhttp.open(crud, "http://localhost:8082/"+api, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(data);
+}
+
 function getDataDVD(api){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -100,13 +134,13 @@ function getDataDVD(api){
 }
 
 
-function getDataActor(api){
+function getDataActor(api, varid) { 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var actorLijst = JSON.parse(this.responseText);
             console.log(actorLijst);
-            var selActors = document.getElementById("actors");
+            var selActors = document.getElementById(varid);
             for (var i=0 ; i< actorLijst.length ; i++) {
                 var opt = document.createElement("option");
                 opt.value = actorLijst[i].id;
@@ -121,7 +155,7 @@ function getDataActor(api){
     xhttp.send();
 }
 
-function getDataGenre(api){
+function getDataGenre(api, varid) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

@@ -72,8 +72,7 @@ public class DVDEndpoint {
 		}
 		return Response.ok(result).build();
 	}
-	
-	
+		
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
