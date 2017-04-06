@@ -72,8 +72,7 @@ public class DVDEndpoint {
 		}
 		return Response.ok(result).build();
 	}
-	
-	
+		
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
@@ -82,6 +81,14 @@ public class DVDEndpoint {
 		return Response.accepted().build();
 	}
 
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response putDVD(DVD dvd) {
+		DVD result = this.dvdService.save(dvd);
+		return Response.accepted(result).build();
+	}
+	
 	/**
 	 * Methode om een actor aan een DVD toe te voegen
 	 * @param id de id van de DVD

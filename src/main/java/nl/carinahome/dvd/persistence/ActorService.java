@@ -1,5 +1,8 @@
 package nl.carinahome.dvd.persistence;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,7 @@ public class ActorService {
 	private ActorRepository actorRepository;
 
 	public Actor save(Actor actor){
+		System.out.println("Actor id "+ actor.getId());
 		return actorRepository.save(actor);
 	}
 
@@ -27,6 +31,40 @@ public class ActorService {
 
 	public void deleteById(Long id) {
 		actorRepository.delete(id);
+	}
+	
+	/**
+	 * Maak een nieuwe actor aan in de database. Er worden wat checks uitgevoerd om database foutmeldingen te voorkomen.
+	 * @param actor De id van de nieuwe actor
+	 * @return de nieuwe id of anders <ul>
+	 * <li>-1 als de actor een id heeft
+	 * <li>-2 als firstname and lastname gelijk is aan null
+	 * <li>-3 als de title al bestaat
+	 * </ul>
+	 */
+	public long newActor(Actor actor) {
+		System.out.println(actor);
+		if (actor.getId() != 0) {
+			return -1;
+		} else if (actor.getFirstName() == null || actor.getLastName() == null) {
+			return -2;
+		} else {
+			System.out.println(actor);
+			List<Actor> actors = new ArrayList<>();
+			actors = (List<Actor>) this.actorRepository.findAll();
+			System.out.println("Size=" + actors.size());
+			for (int i=0 ; i<actors.size() ; i++) {
+				System.out.println(actor + "   " + i);
+
+				if (actors.get(i).getFirstName().equals(actor.getFirstName()) & actors.get(i).getLastName().equals(actor.getLastName())   ) {
+					return -3;
+				}
+			}
+		}
+		System.out.println(actor);
+
+		Actor result = this.actorRepository.save(actor);
+		return result.getId();
 	}
 	
 }

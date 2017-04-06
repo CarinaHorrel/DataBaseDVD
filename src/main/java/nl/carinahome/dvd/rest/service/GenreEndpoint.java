@@ -1,5 +1,8 @@
 package nl.carinahome.dvd.rest.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import nl.carinahome.dvd.domain.Genre;
+import nl.carinahome.dvd.domain.model.GenreModelBasic;
 import nl.carinahome.dvd.persistence.GenreService;
 
 @Path("genre")
@@ -23,26 +27,49 @@ public class GenreEndpoint {
 	@Autowired
 	private GenreService genreService;
 	
+	/**
+	 * Creates a new genre
+	 * @param actor the new Genre to be added to the database
+	 * @return Code 202 (accepted) with the new genre id
+	 */	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response postGenre(Genre genre){
-		Genre result = genreService.save(genre);
-		return Response.accepted(result).build();
+		Long newId = genreService.newGenre(genre);
+		return Response.accepted(newId).build();
 	}
 	
+	/**
+	 * Gets an existing genre
+	 * @param id the id of the Genre to be fetched
+	 * @return Code 200 (ok) with the Genre or 204 (no content) if the genre does not exist
+	 */	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public Response getGenreById(@PathParam("id") Long id ) {
-		Genre result = this.genreService.findById(id);
-		return Response.ok(result).build();
+		Genre genre = this.genreService.findById(id);
+		if (genre == null) {
+			return Response.noContent().build();
+		} else {
+			Genre l2 = this.genreService.findById(id);
+			System.out.println(genre.equals(l2));
+			GenreModelBasic result = new GenreModelBasic(genre);
+			return Response.ok(result).build();
+		}
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listGenre(){
-		Iterable <Genre> result = genreService.findAll();
+		List<GenreModelBasic> result = new ArrayList<>();
+		List<Genre> genres = new ArrayList<>();
+		genres = (List<Genre>) genreService.findAll();
+		for (int i=0 ; i<genres.size() ; i++ ) {
+			GenreModelBasic dmb = new GenreModelBasic(genres.get(i));
+			result.add(dmb);
+		}
 		return Response.ok(result).build();
 	}
 	
@@ -58,8 +85,7 @@ public class GenreEndpoint {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response putGenre(Genre genre) {
-		this.genreService.save(genre);
-		Genre result = genreService.save(genre);
+		Genre result = this.genreService.save(genre);
 		return Response.accepted(result).build();
 	}
 	
