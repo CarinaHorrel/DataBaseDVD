@@ -24,7 +24,7 @@ public class DVDService {
 	private GenreService genreService;
 	
 	public DVD save(DVD dvd){
-		System.out.println("DVD id "+ dvd.getId());
+		//System.out.println("DVD id "+ dvd.getId());
 		return dvdRepository.save(dvd);
 	}
 
@@ -64,7 +64,7 @@ public class DVDService {
 				}
 			}
 		}
-		System.out.println(dvd);
+		//System.out.println(dvd);
 		
 		DVD result = this.dvdRepository.save(dvd);
 		return result.getId();

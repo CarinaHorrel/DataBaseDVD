@@ -161,7 +161,7 @@ function getDataGenre(api, varid) {
         if (this.readyState == 4 && this.status == 200) {
             var genreLijst = JSON.parse(this.responseText);
             console.log(genreLijst);
-            var selGenres = document.getElementById("genres");
+            var selGenres = document.getElementById(varid);
             for (var i=0 ; i< genreLijst.length ; i++) {
                 var opt = document.createElement("option");
                 opt.value = genreLijst[i].id;
