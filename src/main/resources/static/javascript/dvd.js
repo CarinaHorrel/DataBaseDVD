@@ -30,9 +30,8 @@ function addActortoDVD(){
 
 function addGenretoDVD(){
     var id = document.getElementById("id").value;
-    var id_genre = document.getElementById("id_genre").value;
-    var dvd = '{"id":'+id+', "id":'+id_genre+'"}'; 
-    postData('api/dvd/id/genre/id_genre', dvd_genres, "PUT");
+    var id_genre = document.getElementById("dvd_genres").value;
+    postData('api/dvd/'+id+'/genre/'+id_genre,"", "PUT");
 }
 
 function putDataDVD(){
@@ -301,6 +300,7 @@ function getExternalData(dvd) {
             console.log(extDVD);
             document.getElementById("dvdPlot").textContent = extDVD.Plot;
             document.getElementById("dvdPoster").src = extDVD.Poster;
+            document.getElementById("dvdGenre").textContent = extDVD.Genre;
         }
     };
     xhttp.open("GET", url);
