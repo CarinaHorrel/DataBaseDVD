@@ -16,8 +16,10 @@
 			remarks:<input type="text" id="remarks"/><br />
 
 			<h4>Optional:</h4>
-			<select id="dvd_actors" onchange="selectActor(event)">
+			<select id="dvd_actors" onchange="selectActor(event)" >
 				<option value="actors">actors</option>
+				  
+
 			</select>
 
 			<select id="dvd_genres" onchange="selectGenre(event)">
@@ -41,8 +43,8 @@
 			lastname:<input type="text" id="lastname"/><br />
 			<button onclick="addActor()">AddActor</button><br>
 			<button onclick="getDataActor('api/actor')">getActor</button><br>
-			<select id="actors" onchange="selectActor(event)">
-				<option value="actors">actors</option>
+			<select id="actors" onchange="selectActor(event)" >
+				<option value="actors" >actors</option>
 			</select>
 			<select id="subDVDsA" onchange="selectDVD(event)">	
 			</select><br>
