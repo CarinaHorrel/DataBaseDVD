@@ -14,19 +14,25 @@
 			origin:<input type="text" id="origin"/><br />
 			bonus:<input type="text" id="bonus"/><br />
 			remarks:<input type="text" id="remarks"/><br />
-
+			<button onclick="addDVD()">AddDVD</button><br><br>
+			<img id="dvdPoster" src="">
+			<h3>Plot</h3>
+			<p id="dvdPlot"></p>
 			<h4>Optional:</h4>
+			<h4>Add actor to DVD</h4>
 			<select id="dvd_actors" onchange="selectActor(event)" >
-				<option value="actors">actors</option>
-				  
-
+				<option value="actors">actors</option>                                            
 			</select>
-
+			<button onclick="addActortoDVD()">AddActortoDVD</button><br>
+			<br>
+			<h4>Add genre to DVD</h4>
 			<select id="dvd_genres" onchange="selectGenre(event)">
 				<option value="genres">genres</option>
 			</select>
-
-			<button onclick="addDVD()">AddDVD</button><br>
+			<button onclick="addGenretoDVD()">AddGenretoDVD</button><br>
+			<br>
+			<br>
+		
 			<button onclick="getDataDVD('api/dvd')">getDVD</button>
 			<select id="DVDs" onchange="selectDVD(event)">
 				<option value="dvds">dvds</option>
