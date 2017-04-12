@@ -22,6 +22,18 @@ function addDVD(){
     postData('api/dvd', dvd, "POST");
 }
 
+function addActortoDVD(){
+    var id = document.getElementById("id").value;
+    var id_actor = document.getElementById("dvd_actors").value;
+    postData('api/dvd/'+id+'/actor/'+id_actor, "", "PUT");
+}
+
+function addGenretoDVD(){
+    var id = document.getElementById("id").value;
+    var id_genre = document.getElementById("dvd_genres").value;
+    postData('api/dvd/'+id+'/genre/'+id_genre,"", "PUT");
+}
+
 function putDataDVD(){
     console.log("PUT");
     var id = document.getElementById("id").value;
@@ -70,9 +82,12 @@ function postData(api, data, crud){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
             console.log(this.responseText);
-            if (api=='api/dvd') getDataDVD(api);
+            if (api=='api/dvd') {
+                getDataDVD(api);
+                document.getElementById("id").value=this.responseText;
+            }
             else if (api=='api/actor') getDataActor(api);
-             else if (api=='api/genre') getDataGenre(api);
+            else if (api=='api/genre') getDataGenre(api);
         }
     };
     xhttp.open(crud, "http://localhost:8082/"+api, true);
@@ -179,8 +194,8 @@ function getDataGenre(api, varid) {
 
 function selectDVD(event) {
     var id=event.target.value;
-    dvd = getDVDByID(id);
-    console.log(event.target.value);
+    getDVDByID(id);
+
 }       
 
 function selectActor(event) {
@@ -267,9 +282,29 @@ function getDVDByID(id){
             document.getElementById("origin").value=dvd.origin;
             document.getElementById("bonus").value=dvd.bonus;
             document.getElementById("remarks").value=dvd.remarks;
+            getExternalData(dvd);
         }
     };
     xhttp.open("GET", "http://localhost:8082/api/dvd/"+id);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
+}
+
+function getExternalData(dvd) {
+    var url = "http://www.omdbapi.com/?t=";
+    url += dvd.title;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var extDVD = JSON.parse(this.responseText);
+            console.log(extDVD);
+            document.getElementById("dvdPlot").textContent = extDVD.Plot;
+            document.getElementById("dvdPoster").src = extDVD.Poster;
+            document.getElementById("dvdGenre").textContent = extDVD.Genre;
+        }
+    };
+    xhttp.open("GET", url);
+    xhttp.send();
+
+
 }
