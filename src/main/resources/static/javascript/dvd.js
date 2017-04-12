@@ -84,10 +84,10 @@ function postData(api, data, crud){
             console.log(this.responseText);
             if (api=='api/dvd') {
                 getDataDVD(api);
-               document.getElementById("id").value=this.responseText;
+                document.getElementById("id").value=this.responseText;
             }
             else if (api=='api/actor') getDataActor(api);
-             else if (api=='api/genre') getDataGenre(api);
+            else if (api=='api/genre') getDataGenre(api);
         }
     };
     xhttp.open(crud, "http://localhost:8082/"+api, true);
