@@ -77,6 +77,12 @@ public class DVDEndpoint {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public Response deleteDVDById(@PathParam("id") Long id){
+		DVD dvd = this.dvdService.findById(id);
+		if (dvd == null) {
+			return Response.noContent().build();
+		}
+		dvd.removeAllActors();
+		dvd.removeAllGenres();
 		this.dvdService.deleteById(id);
 		return Response.accepted().build();
 	}

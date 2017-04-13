@@ -2,32 +2,46 @@
 	<head>
 		<title>Database DVDs</title>
 		<script src="javascript/dvd.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/dvd.css" />
+		
 	</head>
 	<body>
 		<!--RESULT SERVER: -->
-		<div id=demo>
-			<hr>
-			<h1>DVD:</h1>
-            id:<input type="text" id="id"/><br />
-			title:<input type="text" id="title"/><br />
-			year:<input type="text" id="year"/><br />
-			origin:<input type="text" id="origin"/><br />
-			bonus:<input type="text" id="bonus"/><br />
-			remarks:<input type="text" id="remarks"/><br />
-			<button onclick="addDVD()">AddDVD</button><br><br>
-			<img id="dvdPoster" src="">
-			<h3>Genre</h3>
-			<p id="dvdGenre"></p>
-			<h3>Plot</h3>
-			<p id="dvdPlot"></p>
-			<h4>Optional:</h4>
-			<h4>Add actor to DVD</h4>
+    <hr>
+    <h1>DVD</h1>
+    <div id="divDvdSelect">
+      <h2>DVD Select</h2>
+      <!--<button onclick="getDataDVD('api/dvd')">getDVD</button>-->
+      <select id="DVDs" onchange="selectDVD(event)">
+      </select>
+      <h3>Genre</h3>
+      <p id="dvdGenre"></p>
+      <h3>Plot</h3>
+      <p id="dvdPlot"></p>
+    </div>
+    <div id="divPoster">
+      <img id="dvdPoster" src="">
+    </div>
+		<div id="divDvdIn">
+		  <h2>DVD input</h2>
+      <label class="lblDvdIn">id:</label>      <input type="text" id="id"/><br />
+			<label class="lblDvdIn">title:</label>   <input type="text" id="title"/><br />
+			<label class="lblDvdIn">year:</label>    <input type="text" id="year"/><br />
+			<label class="lblDvdIn">origin:</label>  <input type="text" id="origin"/><br />
+			<label class="lblDvdIn">bonus:</label>   <input type="text" id="bonus"/><br />
+			<label class="lblDvdIn">remarks:</label> <input type="text" id="remarks"/><br />
+			<button onclick="addDVD()">AddDVD</button> 
+			<button onclick="putDataDVD('api/dvd')">updateDVD</button>
+			<button onclick="deleteDVD('api/dvd', 'dvd')">deleteDVD</button>
+		</div>
+		<div id ="divDvdOptions">
+			<h2>Optional</h2>
+			<h3>Add actor to DVD</h3>
 			<select id="dvd_actors" onchange="selectActor(event)" >
 				<option value="actors">actors</option>                                            
 			</select>
 			<button onclick="addActortoDVD()">AddActortoDVD</button><br>
-			<br>
-			<h4>Add genre to DVD</h4>
+			<h3>Add genre to DVD</h3>
 			<select id="dvd_genres" onchange="selectGenre(event)">
 				<option value="genres">genres</option>
 			</select>
@@ -35,14 +49,6 @@
 			<br>
 			<br>
 		
-			<!--<button onclick="getDataDVD('api/dvd')">getDVD</button>-->
-			<select id="DVDs" onchange="selectDVD(event)">
-				<option value="dvds">dvds</option>
-			</select><br>
-			<br>
-            <button onclick="putDataDVD('api/dvd')">updateDVD</button><br>
-			<br>
-		    <button onclick="deleteDVD('api/dvd', 'dvd')">deleteDVD</button><br>
 		</div>
 		<hr>
  

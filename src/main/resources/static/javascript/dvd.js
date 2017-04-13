@@ -5,6 +5,10 @@ var dvdSelected
 var genreSelected;
 var genreLijst;
 window.onload=function(){
+	refreshData();
+}
+
+function refreshData() {
     getDataDVD('api/dvd');
     getDataActor('api/actor', "dvd_actors"); 
     getDataActor('api/actor', "actors");
@@ -118,10 +122,11 @@ function deleteData(api, data, crud){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
-            console.log(this.responseText);
+            console.log("DELETE success");
+            refreshData();
+            
         }
     };
-    
     xhttp.open(crud, "http://localhost:8082/"+api, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(data);
@@ -134,8 +139,14 @@ function getDataDVD(api){
             dvdLijst = JSON.parse(this.responseText);
             console.log(dvdLijst);
             var selDVDs = document.getElementById("DVDs");
+            selDVDs.innerHTML = "";
+            
+            var opt = document.createElement("option");
+            opt.value = 0;
+            opt.textContent = "dvds" ;
+            selDVDs.appendChild(opt);
             for (var i=0 ; i< dvdLijst.length ; i++) {
-                var opt = document.createElement("option");
+                opt = document.createElement("option");
                 opt.value = dvdLijst[i].id;
                 opt.textContent = dvdLijst[i].title ;
                 selDVDs.appendChild(opt);

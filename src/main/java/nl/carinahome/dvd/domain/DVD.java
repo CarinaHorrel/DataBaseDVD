@@ -139,6 +139,13 @@ public class DVD {
 		this.actors.add(actor);
 	}
 	
+	public void removeAllGenres() {
+		this.genres.clear();
+	}
+	public void removeAllActors() {
+		this.genres.clear();
+	}
+	
 	public void dvdCopy(DVD dvd) {
 		this.setRemarks(dvd.getRemarks());
 		this.setTitle(dvd.getTitle());
