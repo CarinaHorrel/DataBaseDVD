@@ -7,24 +7,23 @@
 	</head>
 	<body>
 		<!--RESULT SERVER: -->
-    <hr>
-    <h1>DVD</h1>
-    <div id="divDvdSelect">
-      <h2>DVD Select</h2>
-      <!--<button onclick="getDataDVD('api/dvd')">getDVD</button>-->
-      <select id="DVDs" onchange="selectDVD(event)">
-      </select>
-      <h3>Genre</h3>
-      <p id="dvdGenre"></p>
-      <h3>Plot</h3>
-      <p id="dvdPlot"></p>
-    </div>
-    <div id="divPoster">
-      <img id="dvdPoster" src="">
-    </div>
+	    <hr>
+	    <h1>DVD</h1>
+	    <div id="divDvdSelect">
+			<h2>DVD Select</h2>
+			<!--<button onclick="getDataDVD('api/dvd')">getDVD</button>-->
+			<select id="DVDs" onchange="selectDVD(event)"></select>
+			<h3>Genre</h3>
+			<p id="dvdGenre"></p>
+			<h3>Plot</h3>
+			<p id="dvdPlot"></p>
+	    </div>
+	    <div id="divPoster">
+			<img id="dvdPoster" src="">
+	    </div>
 		<div id="divDvdIn">
-		  <h2>DVD input</h2>
-      <label class="lblDvdIn">id:</label>      <input type="text" id="id"/><br />
+			<h2>DVD input</h2>
+			<label class="lblDvdIn">id:</label>      <input type="text" id="id"/><br />
 			<label class="lblDvdIn">title:</label>   <input type="text" id="title"/><br />
 			<label class="lblDvdIn">year:</label>    <input type="text" id="year"/><br />
 			<label class="lblDvdIn">origin:</label>  <input type="text" id="origin"/><br />
@@ -46,34 +45,25 @@
 				<option value="genres">genres</option>
 			</select>
 			<button onclick="addGenretoDVD()">AddGenretoDVD</button><br>
-			<br>
-			<br>
-		
 		</div>
 		<hr>
- 
 		<div id=demo2>
-			<h1>ACTOR:</h1>
+			<h1>ACTOR</h1>
+			<h2>Actor Select</h2>
+			<select id="actors" onchange="selectActor(event)" ></select>
+			<select id="subDVDsA" onchange="selectDVD(event)"></select>
+			<h2>Actor Info</h2>
 	  	    id_actor:<input type="text" id="id_actor"/><br />
 			firstname:<input type="text" id="firstname"/><br />
 			lastname:<input type="text" id="lastname"/><br />
-			<button onclick="addActor()">AddActor</button><br>
-			<br>
+			<button onclick="addActor()">AddActor</button>
+            <button onclick="putDataActor('api/actor')">updateActor</button>
+			<button onclick="deleteActor('api/actor', 'actor')">deleteActor</button>
 			<!--<button onclick="getDataActor('api/actor')">getActor</button><br>-->
-			<select id="actors" onchange="selectActor(event)" >
-				<option value="actors" >actors</option>
-			</select>
-			<select id="subDVDsA" onchange="selectDVD(event)">	
-			</select><br>
-			<br>
-            <button onclick="putDataActor('api/actor')">updateActor</button><br>
-			<br>
-			<button onclick="deleteActor('api/actor', 'actor')">deleteActor</button><br>
 		</div>
 			
 		<hr>
 		<div id=demo3>
-			<hr>
 			<h1>GENRE:</h1>
 	   	    id_genre:<input type="text" id="id_genre"/><br />
 			genrename:<input type="text" id="genrename"/><br />

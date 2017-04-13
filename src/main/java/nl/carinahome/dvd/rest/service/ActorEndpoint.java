@@ -18,14 +18,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import nl.carinahome.dvd.domain.Actor;
+import nl.carinahome.dvd.domain.DVD;
 import nl.carinahome.dvd.domain.model.ActorModelBasic;
+import nl.carinahome.dvd.domain.model.DVDModelBasic;
 import nl.carinahome.dvd.persistence.ActorService;
+import nl.carinahome.dvd.persistence.DVDService;
 
 @Path("actor")
 @Component
 public class ActorEndpoint {
 	@Autowired
 	private ActorService actorService;
+
+	@Autowired
+	private DVDService dvdService;
 	
 	/**
 	 * Creates a new actor
@@ -77,6 +83,18 @@ public class ActorEndpoint {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
 	public Response deleteActorById(@PathParam("id") Long id){
+		Actor actor = this.actorService.findById(id);
+		if (actor == null) {
+			return Response.noContent().build();
+		}
+		List<DVD> dvds = new ArrayList<>();
+		dvds = (List<DVD>) dvdService.findAll();
+		for (int i=0 ; i<dvds.size() ; i++ ) {
+			DVD dvd = dvds.get(i);
+			if (dvd.removeOneActor(actor)) {
+				this.dvdService.save(dvd);
+			}
+		}
 		this.actorService.deleteById(id);
 		return Response.accepted().build();
 	}
