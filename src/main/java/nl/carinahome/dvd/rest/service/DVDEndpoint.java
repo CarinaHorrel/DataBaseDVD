@@ -81,11 +81,24 @@ public class DVDEndpoint {
 		return Response.accepted().build();
 	}
 
+	/**
+	 * FaerieRose: je bewaart bij deze PUT de dvd die je binnen krijgt. Mocht deze dvd inderdaad al bestaan
+	 *   en lege velden hebben dan worden alle bestaande gegevens overschreven. Ik zal de Endpoint zo aanpassen
+	 *   dat de acteurs en genres bewaard blijven
+	 * @param dvd
+	 * @return
+	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response putDVD(DVD dvd) {
-		DVD result = this.dvdService.save(dvd);
+		long id = dvd.getId();
+		if (id == 0) {
+			return Response.accepted().build();
+		}
+		DVD result = this.dvdService.findById(id);
+		result.dvdCopy(dvd);
+		this.dvdService.save(result);
 		return Response.accepted(result).build();
 	}
 	

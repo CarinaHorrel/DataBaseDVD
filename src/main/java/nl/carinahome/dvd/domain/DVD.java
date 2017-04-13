@@ -139,6 +139,14 @@ public class DVD {
 		this.actors.add(actor);
 	}
 	
+	public void dvdCopy(DVD dvd) {
+		this.setRemarks(dvd.getRemarks());
+		this.setTitle(dvd.getTitle());
+		this.setYear(dvd.getYear());
+		this.setOrigin(dvd.getOrigin());
+		this.setBonus(dvd.isBonus());
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
