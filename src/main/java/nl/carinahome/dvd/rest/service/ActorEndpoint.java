@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import nl.carinahome.dvd.domain.Actor;
 import nl.carinahome.dvd.domain.DVD;
 import nl.carinahome.dvd.domain.model.ActorModelBasic;
-import nl.carinahome.dvd.domain.model.DVDModelBasic;
+
 import nl.carinahome.dvd.persistence.ActorService;
 import nl.carinahome.dvd.persistence.DVDService;
 

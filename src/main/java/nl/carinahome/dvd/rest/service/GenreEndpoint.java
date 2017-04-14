@@ -17,8 +17,10 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import nl.carinahome.dvd.domain.DVD;
 import nl.carinahome.dvd.domain.Genre;
 import nl.carinahome.dvd.domain.model.GenreModelBasic;
+import nl.carinahome.dvd.persistence.DVDService;
 import nl.carinahome.dvd.persistence.GenreService;
 
 @Path("genre")
@@ -27,6 +29,9 @@ public class GenreEndpoint {
 	@Autowired
 	private GenreService genreService;
 	
+	/*Added by C.Horrel */
+	@Autowired
+	private DVDService dvdService;
 	/**
 	 * Creates a new genre
 	 * @param actor the new Genre to be added to the database
@@ -72,7 +77,7 @@ public class GenreEndpoint {
 		}
 		return Response.ok(result).build();
 	}
-	
+	/* replaced by below code
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("{id}")
@@ -80,7 +85,27 @@ public class GenreEndpoint {
 		this.genreService.deleteById(id);
 		return Response.accepted().build();
 	}
-
+*/
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("{id}")
+	public Response deleteGenreById(@PathParam("id") Long id){
+		Genre genre = this.genreService.findById(id);
+		if (genre == null) {
+			return Response.noContent().build();
+		}
+		List<DVD> dvds = new ArrayList<>();
+		dvds = (List<DVD>) dvdService.findAll();
+		for (int i=0 ; i<dvds.size() ; i++ ) {
+			DVD dvd = dvds.get(i);
+			if (dvd.removeOneGenre(genre)) {
+				this.dvdService.save(dvd);
+			}
+		}
+		this.genreService.deleteById(id);
+		return Response.accepted().build();
+	}
+	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

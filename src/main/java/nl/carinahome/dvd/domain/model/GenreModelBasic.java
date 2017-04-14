@@ -1,6 +1,5 @@
 package nl.carinahome.dvd.domain.model;
 
-import nl.carinahome.dvd.domain.Actor;
 import nl.carinahome.dvd.domain.Genre;
 
 

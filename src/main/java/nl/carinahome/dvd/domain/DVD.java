@@ -141,6 +141,14 @@ public class DVD {
 		this.genres.clear();
 	}
 
+	// added by C. Horrel: not sure if it will happen
+	// If type mistake and it is added to list of genres, 
+	// then it would be nice, if it possible to delete.
+	
+	public boolean removeOneGenre(Genre genre) {
+		return this.genres.remove(genre);
+	}
+	
 /* =====================================
 	Removing and adding actors
    ===================================== */

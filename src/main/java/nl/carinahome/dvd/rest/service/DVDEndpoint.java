@@ -29,7 +29,7 @@ public class DVDEndpoint {
 	
 	/**
 	 * Creates a new dvd
-	 * @param dvd the new DVD to be added tot the database
+	 * @param dvd the new DVD to be added to the database
 	 * @return Code 202 (accepted) with the new dvd id
 	 */	
 	@POST
