@@ -5,6 +5,10 @@ var dvdSelected
 var genreSelected;
 var genreLijst;
 window.onload=function(){
+	refreshData();
+}
+
+function refreshData() {
     getDataDVD('api/dvd');
     getDataActor('api/actor', "dvd_actors"); 
     getDataActor('api/actor', "actors");
@@ -82,12 +86,10 @@ function postData(api, data, crud){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
             console.log(this.responseText);
+        	refreshData();
             if (api=='api/dvd') {
-                getDataDVD(api);
                 document.getElementById("id").value=this.responseText;
             }
-            else if (api=='api/actor') getDataActor(api);
-            else if (api=='api/genre') getDataGenre(api);
         }
     };
     xhttp.open(crud, "http://localhost:8082/"+api, true);
@@ -118,10 +120,10 @@ function deleteData(api, data, crud){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 202) {
-            console.log(this.responseText);
+            console.log("DELETE success");
+            refreshData();
         }
     };
-    
     xhttp.open(crud, "http://localhost:8082/"+api, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(data);
@@ -134,8 +136,14 @@ function getDataDVD(api){
             dvdLijst = JSON.parse(this.responseText);
             console.log(dvdLijst);
             var selDVDs = document.getElementById("DVDs");
+            selDVDs.innerHTML = "";
+            
+            var opt = document.createElement("option");
+            opt.value = 0;
+            opt.textContent = "dvds" ;
+            selDVDs.appendChild(opt);
             for (var i=0 ; i< dvdLijst.length ; i++) {
-                var opt = document.createElement("option");
+                opt = document.createElement("option");
                 opt.value = dvdLijst[i].id;
                 opt.textContent = dvdLijst[i].title ;
                 selDVDs.appendChild(opt);
@@ -156,6 +164,11 @@ function getDataActor(api, varid) {
             var actorLijst = JSON.parse(this.responseText);
             console.log(actorLijst);
             var selActors = document.getElementById(varid);
+            selActors.innerHTML = "";
+            var opt = document.createElement("option");
+            opt.value = 0;
+            opt.textContent = "actors" ;
+            selActors.appendChild(opt);
             for (var i=0 ; i< actorLijst.length ; i++) {
                 var opt = document.createElement("option");
                 opt.value = actorLijst[i].id;
@@ -163,6 +176,8 @@ function getDataActor(api, varid) {
                 selActors.appendChild(opt);
                 //document.getElementById("demo").innerHTML += actorLijst[i].firstName + " " + actorLijst[i].lastName + "<br>";
             }
+            var subdvda=document.getElementById("subDVDsA");
+            subdvda.innerHTML="";
         }
     };
     xhttp.open("GET", "http://localhost:8082/"+api);

@@ -131,12 +131,35 @@ public class DVD {
 		this.actors = actors;
 	}
 	
+/* =====================================
+	Removing and adding genres
+   ===================================== */
 	public void addGenre(Genre genre){
 		this.genres.add(genre);
 	}
-	
+	public void removeAllGenres() {
+		this.genres.clear();
+	}
+
+/* =====================================
+	Removing and adding actors
+   ===================================== */
 	public void addActor(Actor actor){
 		this.actors.add(actor);
+	}
+	public void removeAllActors() {
+		this.actors.clear();
+	}
+	public boolean removeOneActor(Actor actor) {
+		return this.actors.remove(actor);
+	}
+	
+	public void dvdCopy(DVD dvd) {
+		this.setRemarks(dvd.getRemarks());
+		this.setTitle(dvd.getTitle());
+		this.setYear(dvd.getYear());
+		this.setOrigin(dvd.getOrigin());
+		this.setBonus(dvd.isBonus());
 	}
 	
 	/* (non-Javadoc)
