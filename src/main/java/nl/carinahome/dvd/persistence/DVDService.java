@@ -58,8 +58,10 @@ public class DVDService {
 		} else {
 			List<DVD> dvds = new ArrayList<>();
 			dvds = (List<DVD>) this.dvdRepository.findAll();
-			for (int i=0 ; i<dvds.size() ; i++) {
-				if (dvds.get(i).getTitle().equals(dvd.getTitle())) {
+			for (int i=0 ; i<dvds.size() ; i++) {	
+				
+				if (dvds.get(i).getTitle().equals(dvd.getTitle()) & dvds.get(i).getYear()==(dvd.getYear())) {
+					System.out.println("DVD id "+ dvd.getId()+" DVD year "+ dvd.getYear());
 					return -3;
 				}
 			}

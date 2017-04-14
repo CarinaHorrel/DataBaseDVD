@@ -39,7 +39,7 @@ public class ActorService {
 	 * @return de nieuwe id of anders <ul>
 	 * <li>-1 als de actor een id heeft
 	 * <li>-2 als firstname and lastname gelijk is aan null
-	 * <li>-3 als de title al bestaat
+	 * <li>-3 als de actor al bestaat
 	 * </ul>
 	 */
 	public long newActor(Actor actor) {

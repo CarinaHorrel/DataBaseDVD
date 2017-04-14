@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2017 at 08:39 PM
+-- Generation Time: Apr 14, 2017 at 02:51 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -42,7 +42,6 @@ INSERT INTO `actor` (`id`, `first_name`, `last_name`) VALUES
 (3, 'Halle', 'Berry'),
 (4, 'Lorraine', 'Bracco'),
 (5, 'Amy', 'Brenneman'),
-(6, 'Evelyne', 'Brochu'),
 (7, 'George', 'Clooney'),
 (8, 'Kevin', 'Costner'),
 (9, 'Tom', 'Cruise'),
@@ -68,7 +67,8 @@ INSERT INTO `actor` (`id`, `first_name`, `last_name`) VALUES
 (29, 'Denzel', 'Washington'),
 (30, 'Sigourney', 'Weaver'),
 (31, 'Bruce', 'Willis'),
-(32, 'Robin', 'Wright');
+(32, 'Robin', 'Wright'),
+(33, 'Evelyne ', 'Brochu');
 
 -- --------------------------------------------------------
 
@@ -2829,7 +2829,7 @@ INSERT INTO `dvd` (`id`, `bonus`, `origin`, `remarks`, `title`, `year`) VALUES
 (9135, b'0', '', '', 'In the Heart of the Sea', 2015),
 (9136, b'0', '', '', 'Reggae Sunsplash', 1980),
 (9137, b'1', 'DVD', '', 'Still Alice', 2014),
-(9138, b'1', 'DVD', '', 'Tom at the Farm/Tom à la ferme', 2013),
+(9138, b'1', 'DVD', '', 'Tom at the Farm', 2013),
 (9139, b'1', 'DVD', '', 'Café de Flore', 2011),
 (9140, b'0', '', '', ' Ratter', 2015),
 (9141, b'0', '', '', 'I ll See You in My Dreams', 2015),
@@ -3295,7 +3295,18 @@ INSERT INTO `dvd` (`id`, `bonus`, `origin`, `remarks`, `title`, `year`) VALUES
 (11523, b'0', '', '', 'Basic Instinct 2', 2006),
 (11524, b'0', '', '', 'Fri os fra det onde/Deliver Us from Evil', 2009),
 (11525, b'0', 'DVD', '', 'Chaplin ', 1992),
-(11526, b'0', 'DVD', '', 'The Judge', 2014);
+(11526, b'0', 'DVD', '', 'The Judge', 2014),
+(11527, b'0', '', '', 'Miséricorde', 2016),
+(11528, b'0', '', '', 'Le passé devant nous', 2016),
+(11529, b'0', '', '', 'Rememory', 2017),
+(11530, b'0', 'DVD', 'Regio 1, english subtitles, also available via Itunes', 'Polytechnique ', 2009),
+(11531, b'0', '', '', 'Aveux ', 2009),
+(11532, b'0', '', '', 'Mirador ', 2010),
+(11533, b'0', 'DVD', 'Regio 1, english subtitles, also available via Itunes', 'Frisson des collines', 2011),
+(11534, b'1', 'DVD', 'Regio 1, english subtitles, also available via Itunes', 'Inch\'Allah', 2012),
+(11535, b'0', '', '', 'La marraine', 2014),
+(11536, b'1', 'DVD', 'Regio 1, english subtitles', 'Les loups', 2014),
+(11537, b'0', '', '', 'Consumed', 2014);
 
 -- --------------------------------------------------------
 
@@ -4236,7 +4247,21 @@ INSERT INTO `dvd_actors` (`dvd_id`, `actors_id`) VALUES
 (580, 31),
 (581, 31),
 (562, 31),
-(531, 32);
+(531, 32),
+(11527, 33),
+(11528, 33),
+(11529, 33),
+(11530, 33),
+(11531, 33),
+(11532, 33),
+(11533, 33),
+(9139, 33),
+(9138, 33),
+(11534, 33),
+(11535, 33),
+(9145, 33),
+(11536, 33),
+(11537, 33);
 
 -- --------------------------------------------------------
 
@@ -6325,7 +6350,33 @@ INSERT INTO `dvd_genres` (`dvd_id`, `genres_id`) VALUES
 (545, 15),
 (546, 1),
 (546, 5),
-(546, 6);
+(546, 6),
+(11527, 6),
+(11527, 13),
+(11528, 6),
+(11529, 6),
+(11529, 13),
+(11529, 16),
+(11530, 5),
+(11530, 6),
+(11530, 9),
+(11531, 6),
+(11532, 6),
+(11533, 6),
+(11533, 15),
+(9139, 6),
+(9139, 15),
+(9138, 6),
+(9138, 14),
+(11534, 6),
+(11535, 5),
+(9145, 3),
+(9145, 7),
+(9145, 18),
+(11536, 6),
+(11537, 1),
+(11537, 5),
+(11537, 10);
 
 -- --------------------------------------------------------
 
@@ -6428,12 +6479,12 @@ ALTER TABLE `genre`
 -- AUTO_INCREMENT for table `actor`
 --
 ALTER TABLE `actor`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `dvd`
 --
 ALTER TABLE `dvd`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11527;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11545;
 --
 -- AUTO_INCREMENT for table `file_import`
 --
